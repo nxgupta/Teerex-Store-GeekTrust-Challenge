@@ -1,12 +1,44 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 
 
-const Cart = ({ cart, setCart }) => {
-  const handleDelete=(product)=>{
-    setCart(cart.filter(item=>item.id!==product.id))
+const Cart = ({ cart, setCart, products }) => {
+  const handleDelete = (item) => {
+    setCart(cart.filter(product => product.id !== item.id))
   }
+
+  const handleClick = ((item, quantity, action) => {
+
+    if (action == 'plus' && quantity >= 1) {
+      let addedItem=products.filter(product=>product.id===item.id);
+        if(addedItem[0].quantity>quantity){
+          setCart(cart.map(product => {
+            if (product.id === item.id) {
+              console.log(product.id, item.id)
+              return { ...product, quantity: item.quantity + 1 }
+            }
+            else {
+              return product
+            }
+          }))
+        }
+        else{
+          alert('You have added the maximum quantity')
+        }
+      }
+    if (action == 'minus' && quantity > 1) {
+      setCart(cart.map(product => {
+        if (product.id === item.id) {
+          console.log(product.id, item.id)
+          return { ...product, quantity: item.quantity - 1 }
+        }
+        else {
+          return product
+        }
+      }))
+    }
+  })
+  console.log(cart)
   return (
     <>
       <Navbar />
@@ -20,14 +52,18 @@ const Cart = ({ cart, setCart }) => {
               </div>
               <div className='item-detail'>
                 <span>{item.name}</span>
-                <span>Rs. {item.price}</span>
+                <span>Rs. {item.price * item.quantity}</span>
               </div>
-              <button className='item-quantity'>
-                <i className="fa fa-plus" aria-hidden="true"></i>
+              <div className='item-quantity'>
+                <button >
+                  <i className="fa fa-plus" aria-hidden="true" onClick={() => handleClick(item, item.quantity, 'plus')}></i>
+                </button>
                 <span style={{ margin: "0px 5px", fontWeight: "bold" }}>{item.quantity}</span>
-                <i className="fa fa-minus" aria-hidden="true"></i>
-              </button>
-              <button className='delete-btn' onClick={()=>handleDelete(item)}>Delete</button>
+                <button >
+                  <i className="fa fa-minus" aria-hidden="true" onClick={() => handleClick(item, item.quantity, 'minus')}></i>
+                </button>
+              </div>
+              <button className='delete-btn' onClick={() => handleDelete(item)}>Delete</button>
             </div>
           ))) : (
             <div className='loading'>
@@ -35,6 +71,13 @@ const Cart = ({ cart, setCart }) => {
             </div>
           )
         }
+
+      </div>
+      <div>
+        <hr/>
+        <div className='total'>
+          Total Payable Amount : {cart.reduce((total,curr)=>total+=(curr.price*curr.quantity),0)}
+        </div>
       </div>
 
     </>
