@@ -6,6 +6,7 @@ import Navbar from './Navbar'
 const Cart = ({ cart, setCart }) => {
   const handleDelete=(product)=>{
     setCart(cart.filter(item=>item.id!==product.id))
+    
   }
   return (
     <>
