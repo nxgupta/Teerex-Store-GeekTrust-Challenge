@@ -6,9 +6,9 @@ const Navbar = () => {
   return (
     <div>
       <nav className='nav'>
-        <div className='storename'>TeeRex Store</div>
+      <Link to='/' style={{ color:'Black', textDecoration:'none'}}><div className='storename'>TeeRex Store</div></Link>
         <div className='cart'>
-        <Link to='/cart' style={{ color: 'white' }}>
+        <Link to='/cart'>
           <i className="fa badge fa-shopping-cart" aria-hidden="true" value='5' style={{ fontSize: "35px", cursor: "pointer",color:"black" }}></i></Link>
         </div>
       </nav>

@@ -27,7 +27,6 @@ const Products = ({products,setProducts,cart,setCart}) => {
         setCart([...cart,{id,name,price,imageURL,quantity:1}])
         }
     }
-    console.log(cart)
     return (
         <div className='products'>
             {products.map(item => (
