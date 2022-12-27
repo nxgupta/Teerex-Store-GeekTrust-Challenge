@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 
 
@@ -64,7 +65,7 @@ const Cart = ({ cart, setCart, products }) => {
             </div>
           ))) : (
             <div className='loading'>
-              Cart is Empty
+              Your Cart is Empty, <Link to='/' style={{textDecoration:'none'}}>  Start adding items in the cart</Link> 
             </div>
           )
         }
