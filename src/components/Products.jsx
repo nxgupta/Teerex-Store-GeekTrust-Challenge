@@ -1,5 +1,4 @@
-import React, { useEffect, useState }
-    from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
 const Products = ({products,setProducts,cart,setCart}) => {
@@ -9,21 +8,13 @@ const Products = ({products,setProducts,cart,setCart}) => {
         quantity:"",
         image:""
     }
-    useEffect(() => {
-        async function fetchData() {
-            let response = await axios.get('https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json');
-            setProducts(response.data)
-        }
-
-        fetchData();
-    }, [])
 
     const handleClick=({id,name,price,imageURL})=>{
         if(cart.find(item=>item.id===id)){
-            alert(`${name} is already added to cart`)
+            // alert(`${name} is already added to cart`)
         }
         else{
-        alert(`${name} has been added to cart`)
+        // alert(`${name} has been added to cart`)
         setCart([...cart,{id,name,price,imageURL,quantity:1}])
         }
     }

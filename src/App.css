@@ -35,7 +35,7 @@ input:focus{
 .filters{
     display: flex;
     flex-direction: column;
-    width:25%;
+    width:20%;
     padding: 15px;
     margin:25px;
     font-weight:500;
@@ -66,9 +66,10 @@ header{
 }
 .products{
     display: grid;
-    grid-template-columns:1fr 1fr 1fr;
+    grid-template-columns:1fr 1fr 1fr 1fr;
     grid-gap: 25px;
     overflow: auto;
+    height: 100vh;
 }
 
 .card{
@@ -109,6 +110,15 @@ header{
 
 /* Cart-CSS */
 
+.cart-items{
+    height: 60vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .item{
     display: flex;
     justify-content: center;
@@ -131,16 +141,36 @@ header{
     justify-content: center;
     align-items: center;
 }
+
+.shopping-cart{
+    display: flex;
+    justify-content: center;
+}
+
+.total{
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+}
+
 @media screen and (max-width:768px) {
     .products{
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:1fr 1fr 1fr;
     }
 }
 @media screen and (max-width:576px) {
     .products{
-        grid-template-columns:1fr;
+        grid-template-columns:1fr 1fr;
     }
     .nav{
         font-size: 20px;
+    }
+}
+@media screen and (max-width:420px) {
+    .products{
+        grid-template-columns:1fr;
+    }
+    .nav{
+        font-size: 15px;
     }
 }

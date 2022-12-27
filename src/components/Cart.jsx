@@ -9,27 +9,25 @@ const Cart = ({ cart, setCart, products }) => {
 
   const handleClick = ((item, quantity, action) => {
 
-    if (action == 'plus' && quantity >= 1) {
-      let addedItem=products.filter(product=>product.id===item.id);
-        if(addedItem[0].quantity>quantity){
-          setCart(cart.map(product => {
-            if (product.id === item.id) {
-              console.log(product.id, item.id)
-              return { ...product, quantity: item.quantity + 1 }
-            }
-            else {
-              return product
-            }
-          }))
-        }
-        else{
-          alert('You have added the maximum quantity')
-        }
+    if (action === 'plus' && quantity >= 1) {
+      let addedItem = products.filter(product => product.id === item.id);
+      if (addedItem[0].quantity > quantity) {
+        setCart(cart.map(product => {
+          if (product.id === item.id) {
+            return { ...product, quantity: item.quantity + 1 }
+          }
+          else {
+            return product
+          }
+        }))
       }
-    if (action == 'minus' && quantity > 1) {
+      else {
+        alert('You have added the maximum quantity')
+      }
+    }
+    if (action === 'minus' && quantity > 1) {
       setCart(cart.map(product => {
         if (product.id === item.id) {
-          console.log(product.id, item.id)
           return { ...product, quantity: item.quantity - 1 }
         }
         else {
@@ -38,10 +36,9 @@ const Cart = ({ cart, setCart, products }) => {
       }))
     }
   })
-  console.log(cart)
   return (
     <>
-      <Navbar />
+      <Navbar cart={cart} />
       <div className='shopping-cart'><h4>Shopping Cart</h4></div>
       <div className='cart-items'>
         {
@@ -74,9 +71,9 @@ const Cart = ({ cart, setCart, products }) => {
 
       </div>
       <div>
-        <hr/>
+        <hr />
         <div className='total'>
-          Total Payable Amount : {cart.reduce((total,curr)=>total+=(curr.price*curr.quantity),0)}
+          Total Payable Amount : {cart.reduce((total, curr) => total += (curr.price * curr.quantity), 0)}
         </div>
       </div>
 
